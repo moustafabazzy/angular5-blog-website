@@ -1,0 +1,41 @@
+<div class="bg-light" style="height: 100vh;">
+  <div class="row pt-5 m-0">
+    <div class="col-md-4 col-12" style="margin:0 auto;">
+    <form class="bg-white p-5 mt-5" style="border-radius:5px;" (ngSubmit)="onLogin()" #loginForm="ngForm">
+      <h1> Blog App </h1>
+      <hr>
+      <br />
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input [(ngModel)]="username" 
+          type="username" 
+          class="form-control" 
+          id="username" 
+          name="username"
+          placeholder="Username"
+          required
+        > 
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input [(ngModel)]="password" 
+          type="password" 
+          class="form-control" 
+          id="password" 
+          name="password"
+          placeholder="Password"
+          required
+        > 
+      </div>
+
+      <a routerLink="/register"> Create new account</a>
+
+      <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary w-100 mt-3">
+        Login
+      </button>
+
+    </form>
+  </div>
+</div>

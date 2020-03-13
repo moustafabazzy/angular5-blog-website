@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+<!--
+<div style="background-image: url('/assets/rsz_1landing-page3.jpg');height:500px;background-repeat:no-repeat;background-size:cover;background-position:center center;"> 
+  <div class="container d-flex flex-column align-items-center justify-content-center h-100">
+    <span style="font-size:100px;font-weight:bold;">Blog App</span>
+    <span style="font-size:30px;margin-top:-15px;">Blog App</span>
+  </div>
+</div>
+-->
+
+<div class="pt-5 pr-5 d-flex justify-content-end">
+  <a routerLink="/blogs/add" class="btn btn-primary">New Blog</a>
+</div>
+
+<div class="row p-5">
+  <div *ngFor="let blog of Blogs" class="mt-4 col-md-4">
+   <div class="card" style="width: 100%;">
+      <img class="card-img-top" src="{{blog.blogImage}}">
+      <div class="card-body">
+        <h4 class="card-title">{{ blog.name }}</h4>
+        <p class="card-text">{{ blog.description}}</p>
+        <div class="d-flex justify-content-end">
+          <a routerLink="/blogs/view/{{blog.id}}" class="btn btn-sm btn-primary">Read More</a>
+        </div>
+      </div>
+    </div> 
+  </div>
+
+</div>

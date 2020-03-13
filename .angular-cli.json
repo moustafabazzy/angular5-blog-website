@@ -9,7 +9,25 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        { 
+          "glob": "**/*",
+          "input": "../node_modules/tinymce/skins",
+          "output": "assets/tinymce/skins/",
+          "allowOutsideReadDir": true
+
+        },
+        { "glob": "**/*",
+          "input": "../node_modules/tinymce/themes",
+          "output": "assets/tinymce/themes/",
+          "allowOutsideReadDir": true
+        },
+        { 
+          "glob": "**/*", 
+          "input": "../node_modules/tinymce/plugins", 
+          "output": "assets/tinymce/plugins/",
+          "allowOutsideReadDir": true
+        }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -21,7 +39,9 @@
       "styles": [
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+         "../node_modules/tinymce/tinymce.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
