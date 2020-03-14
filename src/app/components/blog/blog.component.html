@@ -5,7 +5,10 @@
     <p class="mt-2">{{Blog.description}}</p>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-sm btn-primary" (click)="onDelete(Blog.id)">
+      <a routerLink="/blogs/edit/{{Blog.id}}" class="btn btn-sm btn-primary">
+        Edit
+      </a>
+      <button class="btn btn-sm btn-primary ml-3" (click)="onDelete(Blog.id)">
         Delete
       </button>
     </div>

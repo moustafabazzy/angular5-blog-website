@@ -15,24 +15,58 @@ export class BlogService {
 
   constructor(private client: HttpClient) { }
 
-    // Fetch all blogs
-    fetchAllBlogs(): Observable<Blog[]> {
-      return this.client.get<Blog[]>(this.blogsUrl);
-    }
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
 
-    // Fetch blog by id
-    fetchBlog(id: number): Observable<Blog> {
-      return this.client.get<Blog>(this.blogsUrl+'/'+id);
-    }
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
 
-    // Add new blog
-    addBlog(blog: Blog): Observable<Blog> {
-      return this.client.post<Blog>(this.blogsUrl, blog, {});
-    }
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message}`);
 
-    // Delete blog
-    deleteBlog(id: number): Observable<Blog> {
-      return this.client.delete<Blog>(this.blogsUrl+'/'+id);
-    }
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  }
+
+  // Fetch all blogs
+  fetchAllBlogs(): Observable<Blog[]> {
+    return this.client.get<any>(this.blogsUrl, this.httpOptions)
+      .pipe(catchError(this.handleError('fetchAllBlogs')));
+  }
+
+  // Fetch blog by id
+  fetchBlog(id: number): Observable<Blog> {
+    return this.client.get<Blog>(this.blogsUrl+'/'+id, this.httpOptions)
+      .pipe(catchError(this.handleError<Blog>('fetchBlog')));
+  }
+
+  // Add new blog
+  addBlog(blog: Blog): Observable<Blog> {
+    return this.client.post<Blog>(this.blogsUrl, blog, this.httpOptions)
+      .pipe(catchError(this.handleError<Blog>('addBlog')));
+  }
+
+  // Delete blog
+  deleteBlog(id: number): Observable<Blog> {
+    return this.client.delete<Blog>(this.blogsUrl+'/'+id, this.httpOptions)
+      .pipe(catchError(this.handleError<Blog>('deleteBlog')));
+  }
+
+  // Update blog 
+  updateBlog(blog: Blog): Observable<Blog> {
+    return this.client.put<Blog>(this.blogsUrl+'/'+blog.id, blog, this.httpOptions)
+      .pipe(catchError(this.handleError<Blog>('updateBlog')));
+  }
 
 }

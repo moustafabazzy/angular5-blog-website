@@ -1,0 +1,15 @@
+<div class="bg-light pt-5" style="height: 100vh;">
+  <div *ngIf="user" class="container bg-white p-5" style="border-radius:5px;">
+    <img class="" src="{{user.avatar}}">
+    <h2 class="mt-2">{{user.name}}</h2>
+    <h2 class="mt-2">{{user.username}}</h2>
+    <div class="d-flex justify-content-end">
+      <a routerLink="/users/edit/{{user.id}}" class="btn btn-sm btn-primary">
+        Edit
+      </a>
+      <button class="btn btn-sm btn-primary ml-3" (click)="onDelete(user.id)">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,13 +1,13 @@
 <div class="bg-light" style="height: 100vh;">
   <div class="container pt-5">
-    <form class="bg-white p-5 " style="border-radius:5px;" (ngSubmit)="onSubmit()" #addBlogForm="ngForm">
-      <h1> Create New Blog</h1>
+    <form *ngIf="blog" class="bg-white p-5 " style="border-radius:5px;" (ngSubmit)="onSubmit()" #addBlogForm="ngForm">
+      <h1> Edit Blog</h1>
       <hr>
       <br />
 
       <div class="form-group">
         <label for="name">Name</label>
-        <input [(ngModel)]="name" 
+        <input [(ngModel)]="blog.name" 
           type="text" 
           class="form-control w-75" 
           id="name" 
@@ -46,3 +46,4 @@
     </form>
   </div>
 </div>
+

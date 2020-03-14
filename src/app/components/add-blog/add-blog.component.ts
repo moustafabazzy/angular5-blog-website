@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+// Services
 import { BlogService } from '../../services/blog/blog.service';
+
+// Models
+import { Blog } from '../../models/blog';
 
 @Component({
   selector: 'app-add-blog',
@@ -30,8 +34,8 @@ export class AddBlogComponent implements OnInit {
     this.description = description;
 
     var newBlog = {
-      name: this.name;
-      description: this.description;
+      name: this.name,
+      description: this.description,
     };
 
     this.blogService.addBlog(newBlog as Blog)

@@ -39,7 +39,9 @@ export class LoginComponent implements OnInit {
 
   // Check logged in user and redirect 
   checkLoggedInUser(): void {
-    let loggedInUserId = localStorage.getItem('BlogApp-userId'); 
+    console.log('check ');
+    this.userService.getIsLoggedIn();
+    let loggedInUserId = this.userService.getLoggedInUserId();
     if (!loggedInUserId) {
       return;
     }
@@ -62,8 +64,9 @@ export class LoginComponent implements OnInit {
 
     for (let user of this.Users) {
       if (user.username == this.username && user.password == this.password) {
-        localStorage.setItem('BlogApp-userId', user.id);
-        this.router.navigate(['/blogs']);
+        this.userService.setLoggedInUserId(user.id);
+        this.userService.getIsLoggedIn();
+        this.router.navigate(['/home']);
         return;
       }
     }
