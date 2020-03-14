@@ -11,6 +11,7 @@ import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { EditBlogComponent } from './components/edit-blog/edit-blog.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { MyBlogsComponent } from './components/my-blogs/my-blogs.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'blogs/view/:id', component: BlogComponent },
   { path: 'blogs/edit/:id', component: EditBlogComponent },
   { path: 'myprofile', component: ProfileComponent },
-  { path: 'myprofile/edit', component: EditProfileComponent }
+  { path: 'myprofile/edit', component: EditProfileComponent },
+  { path: 'myblogs', component: MyBlogsComponent },
 ];
 
 @NgModule({

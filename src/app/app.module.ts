@@ -18,6 +18,8 @@ import { AddBlogComponent } from './components/add-blog/add-blog.component';
 import { EditBlogComponent } from './components/edit-blog/edit-blog.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { BlogThumbnailComponent } from './components/blog-thumbnail/blog-thumbnail.component';
+import { MyBlogsComponent } from './components/my-blogs/my-blogs.component';
 
 // Services
 import { BlogService } from './services/blog/blog.service';
@@ -35,7 +37,9 @@ import { UserService } from './services/user/user.service';
     AddBlogComponent,
     EditBlogComponent,
     ProfileComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    BlogThumbnailComponent,
+    MyBlogsComponent
   ],
   imports: [
     BrowserModule,

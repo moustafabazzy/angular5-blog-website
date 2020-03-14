@@ -9,16 +9,14 @@ import { Blog } from '../../models/blog';
 import { Like } from '../../models/like';
 
 @Component({
-  selector: 'app-blogs',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-my-blogs',
+  templateUrl: './my-blogs.component.html',
+  styleUrls: ['./my-blogs.component.css']
 })
-export class HomeComponent implements OnInit {
+export class MyBlogsComponent implements OnInit {
 
   Blogs: Blog[];
   Likes: Like[];
-
-  loggedInUserId: string;
 
   constructor(
     private blogService: BlogService,
@@ -26,23 +24,22 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getBlogs();
-
-    this.setLoggedInUserId();
+    this.getMyBlogs();
   }
 
-  // Set loggedInUserId
-  setLoggedInUserId() {
-    var id = this.userService.getLoggedInUserId(); 
-    if (id) {
-      this.loggedInUserId = id;
-    }
-  }
-
-  // Fetch all Blogs
-  getBlogs(): void {
+  // Fetch authenticated user Blogs
+  getMyBlogs(): void {
     this.blogService.fetchAllBlogs().subscribe(blogs => {
-        this.Blogs = blogs;
+      // Filter Blogs
+      var userId = this.userService.getLoggedInUserId();
+      var tmp = [];
+      for (let blog of blogs) {
+        if (userId != blog.userId) {
+          continue;
+        }
+        tmp.push(blog);
+      }
+        this.Blogs = tmp;
         this.setIsLiked();
         this.setComments();
     });
@@ -52,6 +49,9 @@ export class HomeComponent implements OnInit {
   // Set blogs' is Liked by authenticated user
   setIsLiked(): void {
     var id = localStorage.getItem('BlogApp-userId');
+    if (!id) {
+      return;
+    }
 
     this.blogService.fetchAllLikes().subscribe(likes => {
       this.Likes = likes;

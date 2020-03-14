@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
 
   // Check logged in user and redirect 
   checkLoggedInUser(): void {
-    console.log('check ');
     this.userService.getIsLoggedIn();
     let loggedInUserId = this.userService.getLoggedInUserId();
     if (!loggedInUserId) {

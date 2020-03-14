@@ -1,17 +1,17 @@
 <div class="bg-dark">
   <nav class="container navbar navbar-dark navbar-expand-lg">
-    <a class="navbar-brand" routerLink="/home" style="font-size:2rem;">Navbar</a>
+    <a class="navbar-brand" routerLink="/home" style="font-size:2rem;">BlogApp</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a *ngIf="isLoggedIn" class="nav-link" href="#" >My Blogs</a>
+          <a *ngIf="isLoggedIn" class="nav-link" href="/myblogs" >My Blogs</a>
         </li>
         <li class="nav-item">
           <a *ngIf="isLoggedIn" class="nav-link" routerLink="/myprofile">Profile</a>

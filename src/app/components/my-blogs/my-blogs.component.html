@@ -1,0 +1,13 @@
+<div class="p-5 bg-light" style="min-height:100vh;">
+  <h1>My Blogs</h1>
+  <div class="row">
+    <div *ngFor="let blog of Blogs" class="mt-4 col-md-4">
+      <app-blog-thumbnail 
+        [blog]="blog"
+        [Likes]="Likes"
+      >
+      </app-blog-thumbnail>
+    </div>
+  </div>
+</div>
+
