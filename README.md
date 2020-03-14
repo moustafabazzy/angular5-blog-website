@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Assumptions
 
-Authentiction was implemented on the frontend due to mockapi.io limitaions, which I used as an api. This is not a secure implementaion, but is sufficient for this Excersice.
+Authentiction was implemented on the frontend due to mockapi.io limitations, which I used as an api. This is not a secure approach, but is sufficient for this excersice.
 
 ## Development server
 
