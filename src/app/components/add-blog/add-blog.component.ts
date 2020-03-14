@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 // Services
 import { BlogService } from '../../services/blog/blog.service';
+import { UserService } from '../../services/user/user.service';
 
 // Models
 import { Blog } from '../../models/blog';
@@ -18,13 +19,19 @@ export class AddBlogComponent implements OnInit {
 
   editorHtml: string;
   description: string;
+  userId: string;
 
   constructor(
     private blogService: BlogService,
+    private userService: UserService,
     private router: Router
   ) { }
 
   ngOnInit() {
+    let id = this.userService.getLoggedInUserId();
+    if (id) {
+      this.userId = id;
+    }
   }
 
   onSubmit() {
@@ -35,10 +42,11 @@ export class AddBlogComponent implements OnInit {
 
     var newBlog = {
       name: this.name,
+      userId: this.userId,
       description: this.description,
     };
 
-    this.blogService.addBlog(newBlog as Blog)
+    this.blogService.addBlog(newBlog)
       .subscribe(blog => this.router.navigate(['/blogs/view/'+blog.id]));
   }
 

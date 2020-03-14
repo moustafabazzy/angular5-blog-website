@@ -28,6 +28,7 @@ export class EditBlogComponent implements OnInit {
     this.loadBlog();
   }
 
+  // Update User
   onSubmit() {
     // Get Blog Description
     var description = this.editorHtml.replace(/(<([^>]+)>)/ig,"");

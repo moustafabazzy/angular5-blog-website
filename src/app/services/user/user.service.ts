@@ -9,6 +9,7 @@ import { User } from '../../models/user';
 @Injectable()
 export class UserService {
 
+ // private usersUrl = 'https://5e6a9df90f70dd001643bf14.mockapi.io/api/v1/users';
   private usersUrl = 'https://5e6a9df90f70dd001643bf14.mockapi.io/api/v1/users';
 
   @Output() isLoggedIn: EventEmitter<any> = new EventEmitter();
@@ -43,7 +44,7 @@ export class UserService {
 
 
   // Set logged in user id
-  setLoggedInUserId(id: number) {
+  setLoggedInUserId(id) {
     localStorage.setItem('BlogApp-userId', id.toString());
   }
 
@@ -65,8 +66,14 @@ export class UserService {
       .pipe(catchError(this.handleError<User>('fetchUser')));
   }
 
+  // Add new user 
+  addUser(user: User): Observable<User> {
+    return this.client.post<User>(this.usersUrl, user, this.httpOptions)
+      .pipe(catchError(this.handleError<User>('addUser')));
+  }
+
   // Update user 
-  updateBlog(user: User): Observable<User> {
+  updateUser(user: User): Observable<User> {
     return this.client.put<User>(this.usersUrl+'/'+user.id, user, this.httpOptions)
       .pipe(catchError(this.handleError<User>('updateUser')));
   }
@@ -74,7 +81,7 @@ export class UserService {
   // Delete user 
   deleteUser(id): Observable<User> {
     return this.client.delete<User>(this.usersUrl+'/'+id, this.httpOptions)
-      .pipe(catchError(this.handleError<Blog>('deleteUser')));
+      .pipe(catchError(this.handleError<User>('deleteUser')));
   }
 
   //

@@ -1,23 +1,37 @@
-<!--
-<div style="background-image: url('/assets/rsz_1landing-page3.jpg');height:500px;background-repeat:no-repeat;background-size:cover;background-position:center center;"> 
-  <div class="container d-flex flex-column align-items-center justify-content-center h-100">
-    <span style="font-size:100px;font-weight:bold;">Blog App</span>
-    <span style="font-size:30px;margin-top:-15px;">Blog App</span>
-  </div>
-</div>
--->
-
-<div class="pt-5 pr-5 d-flex justify-content-end">
-  <a routerLink="/blogs/add" class="btn btn-primary">New Blog</a>
+<div class="pt-5 pr-5 d-flex justify-content-end bg-light">
+  <a *ngIf="loggedInUserId" routerLink="/blogs/add" class="btn btn-primary">New Blog</a>
 </div>
 
-<div class="row p-5">
+<div class="row p-5 bg-light">
   <div *ngFor="let blog of Blogs" class="mt-4 col-md-4">
    <div class="card" style="width: 100%;">
       <img class="card-img-top" src="{{blog.blogImage}}">
+      <div class="d-flex justify-content-end align-items-center m-3">
+        <span>{{ blog.likes }}  likes</span>
+        &nbsp;
+        &nbsp;
+        <a *ngIf="loggedInUserId && blog.isLiked" (click)="unlikeBlog(loggedInUserId, blog)" style="cursor:pointer;color:red;">
+          <i class="fas fa-heart"></i>
+        </a>
+
+        <a *ngIf="loggedInUserId && !blog.isLiked" (click)="likeBlog(loggedInUserId, blog)" style="cursor:pointer;">
+          <i class="fas fa-heart"></i>
+        </a>
+      </div>
+
       <div class="card-body">
         <h4 class="card-title">{{ blog.name }}</h4>
-        <p class="card-text">{{ blog.description}}</p>
+        <p class="card-text">{{ blog.description }}</p>
+
+        <!-- blog comments -->
+        <h6 *ngIf="blog.comments && blog.comments.length>0" style="font-weight:bold;">Comments</h6>
+        <div *ngFor="let comment of blog.comments" class="mt-1">
+          <div class="d-flex align-items-center">
+            <img style="width:40px; height:40px;border-radius:5px;" src={{comment.avatar}}>
+            <span class="ml-2"> {{ comment.comment }} </span>
+          </div>
+        </div>
+
         <div class="d-flex justify-content-end">
           <a routerLink="/blogs/view/{{blog.id}}" class="btn btn-sm btn-primary">Read More</a>
         </div>

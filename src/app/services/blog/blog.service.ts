@@ -7,11 +7,15 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 // Models
 import { Blog } from '../../models/blog';
+import { Like } from '../../models/like';
+import { Comment } from '../../models/comment';
 
 @Injectable()
 export class BlogService {
 
   private blogsUrl = 'https://5e6a9df90f70dd001643bf14.mockapi.io/api/v1/blogs';
+  private likesUrl = 'https://5e6a9df90f70dd001643bf14.mockapi.io/api/v1/likes';
+  private commentsUrl = 'https://5e6a9df90f70dd001643bf14.mockapi.io/api/v1/comments';
 
   constructor(private client: HttpClient) { }
 
@@ -52,7 +56,7 @@ export class BlogService {
   }
 
   // Add new blog
-  addBlog(blog: Blog): Observable<Blog> {
+  addBlog(blog: any): Observable<Blog> {
     return this.client.post<Blog>(this.blogsUrl, blog, this.httpOptions)
       .pipe(catchError(this.handleError<Blog>('addBlog')));
   }
@@ -67,6 +71,42 @@ export class BlogService {
   updateBlog(blog: Blog): Observable<Blog> {
     return this.client.put<Blog>(this.blogsUrl+'/'+blog.id, blog, this.httpOptions)
       .pipe(catchError(this.handleError<Blog>('updateBlog')));
+  }
+
+  // fetch all likes
+  fetchAllLikes(): Observable<any> {
+    return this.client.get<any>(this.likesUrl, this.httpOptions)
+      .pipe(catchError(this.handleError('fetchAllLikes')));
+  }
+
+  // Add blog like
+  addBlogLike(like: any): Observable<any> {
+    return this.client.post<Like>(this.likesUrl, like, this.httpOptions)
+      .pipe(catchError(this.handleError<Blog>('addBlogLike')));
+  }
+
+  // Delete blog like
+  deleteBlogLike(id: number): Observable<Like> {
+    return this.client.delete<Like>(this.likesUrl+'/'+id, this.httpOptions)
+      .pipe(catchError(this.handleError<Like>('deleteBlogLike')));
+  }
+
+  // fetch all comments 
+  fetchAllComments(): Observable<any> {
+    return this.client.get<any>(this.commentsUrl, this.httpOptions)
+      .pipe(catchError(this.handleError('fetchAllComments')));
+  }
+
+  // Add blog comment 
+  addBlogComment(comment: any): Observable<any> {
+    return this.client.post<Comment>(this.commentsUrl, comment, this.httpOptions)
+      .pipe(catchError(this.handleError<Blog>('addBlogComment')));
+  }
+
+  // Delete blog comment
+  deleteBlogComment(id): Observable<Comment> {
+    return this.client.delete<Comment>(this.commentsUrl+'/'+id, this.httpOptions)
+      .pipe(catchError(this.handleError<Like>('deleteBlogComment')));
   }
 
 }

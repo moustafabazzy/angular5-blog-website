@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'blogs/add', component: AddBlogComponent },
   { path: 'blogs/view/:id', component: BlogComponent },
   { path: 'blogs/edit/:id', component: EditBlogComponent },
-  { path: 'myprofile', component: ProfileComponent }
+  { path: 'myprofile', component: ProfileComponent },
   { path: 'myprofile/edit', component: EditProfileComponent }
 ];
 
